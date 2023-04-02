@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "libft.h"
 #include "ft_printf.h"
 #include "push_swap.h"
@@ -29,10 +28,11 @@ int	count_num_arg(char *str)
 	count_num = 0;
 	while (str[i])
 	{
-		if (i == 0 && ft_isdigit(str[i]))
+		if ((i == 0 && ft_isdigit(str[i])) || (i > 0 && ft_isdigit(str[i]) && ft_find_char(str[i - 1], " +-")))
+		{
+			ft_printf("NUMBER = %i\n", ft_atoi(str + i));
 			count_num++;
-		if (i > 0 && ft_isdigit(str[i]) && ft_find_char(str[i - 1], " +-"))
-			count_num++;
+		}
 		if (!ft_find_char(str[i], " +-") && !ft_isdigit(str[i]))
 			ft_exit();
 		i++;
