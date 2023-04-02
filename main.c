@@ -33,8 +33,16 @@ int	count_num_arg(char *str)
 			count_num++;
 		if (i > 0 && ft_isdigit(str[i]) && ft_find_char(str[i - 1], " +-"))
 			count_num++;
+		if (!ft_find_char(str[i], " +-") && !ft_isdigit(str[i]))
+			ft_exit();
 		i++;
 	}
 	ft_printf("%s\n%i\n", str, count_num);
 	return (count_num);
+}
+
+void	ft_exit(void)
+{
+	ft_putstr_fd("Error\n", 2);
+	exit(1);
 }
