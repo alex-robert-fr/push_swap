@@ -25,6 +25,14 @@ int	main(int argc, char *argv[])
 		ft_printf("%i => %i\n", i, a[i]);
 		i++;
 	}
+	if (check_array(tmp[0]))
+	{
+		ft_printf("Error\n");
+		free(a);
+		free(b);
+		free(tmp);
+		return (0);
+	}
 	free(a);
 	free(b);
 	free(tmp);
@@ -40,8 +48,8 @@ int	**init_tab(void *str, int one_arg)
 	if (one_arg)
 	{
 		ft_printf("ONE ARG\n");
-		tab_size = get_size_arg((char*)str);
-		tabs[0] = insert_arg_to_array(str, tab_size);
+		tab_size = get_size_arg((char*)str) + 1;
+		tabs[0] = insert_arg_to_array((char*)str, tab_size);
 		tabs[1] = ft_calloc(tab_size, sizeof(int));
 	}
 	else
@@ -88,4 +96,24 @@ int	*insert_arg_to_array(char *str, int	size)
 		i++;
 	}
 	return (a);
+}
+
+int	check_array(int *nums)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (nums[i])
+	{
+		j = i;
+		while (nums[j])
+		{
+			j++;
+			if (nums[i] == nums[j])
+				return (1);
+		}
+		i++;
+	}
+	return (0);
 }

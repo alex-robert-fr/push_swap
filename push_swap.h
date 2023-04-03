@@ -14,10 +14,9 @@ int		get_size_args(char **str);
 // inserer les nombres dans l'array A
 int		*insert_arg_to_array(char *str, int size);
 int		*insert_args_to_array(char **str, int size);
-//
-int		*get_numbers(char *str);
-int		count_numbers(char *str);
-void	ft_exit(void);
-
+// Verifie les nombre dans l'array A
+int		check_array(int *nums);
+// exit
+//void	ft_exit()
 #endif
 
