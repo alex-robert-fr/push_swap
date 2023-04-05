@@ -8,10 +8,8 @@ int	main(int argc, char *argv[])
 {
 	int	*a;
 	int	*b;
-	int	i;
 	int	**tmp;
 
-	i = 0;
 	if (argc < 2)
 		return (0);
 	else if (argc == 2)
@@ -20,11 +18,6 @@ int	main(int argc, char *argv[])
 		tmp = init_tab(argv, 0);
 	a = tmp[0];
 	b = tmp[1];
-	while (a[i])
-	{
-		ft_printf("%i => %i\n", i, a[i]);
-		i++;
-	}
 	if (check_array(tmp[0]))
 	{
 		ft_printf("Error\n");
@@ -33,6 +26,17 @@ int	main(int argc, char *argv[])
 		free(tmp);
 		return (0);
 	}
+	display(a, b, "init a and b");
+	rules_swap_a(a);
+	display(a, b, "sa");
+	rules_push_b(a, b);
+	display(a, b, "pb");
+	rules_push_b(a, b);
+	display(a, b, "pb");
+	rules_push_b(a, b);
+	display(a, b, "pb");
+	rules_push_b(a, b);
+	display(a, b, "pb");
 	free(a);
 	free(b);
 	free(tmp);
@@ -116,4 +120,31 @@ int	check_array(int *nums)
 		i++;
 	}
 	return (0);
+}
+
+void	display(int *a, int *b, char *str)
+{
+	int	i;
+
+	i = 0;
+	ft_printf("%s\n", str);
+	ft_printf("----------------------------\n");
+	ft_printf("   a b\n");
+	ft_printf("=========\n");
+	while (a[i] || b[i])
+	{
+		ft_printf("%4i %i\n", a[i], b[i]);
+		i++;
+	}
+	ft_printf("----------------------------\n");
+}
+
+int	get_size_array(int *array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+		i++;
+	return (i);
 }

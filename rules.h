@@ -13,4 +13,7 @@ void	rules_reverse_rot_a(int *a);
 void	rules_reverse_rot_b(int *b);
 void	rules_reverse_rot_a_and_b(int *a, int *b);
 
+void	up_array(int *array);
+void	down_array(int *array, int top);
+
 #endif
