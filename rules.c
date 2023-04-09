@@ -2,34 +2,64 @@
 #include "libft.h"
 #include "push_swap.h"
 
-void	rules_swap_a(int *a)
+void	rules_swap(int *a)
 {
 	a[1] = a[0] + a[1];
 	a[0] = a[1] - a[0];
 	a[1] = a[1] - a[0];
 }
 
-void	rules_swap_b(int *b)
+void	rules_swap_all(int *a, int *b)
 {
-	b[1] = b[0] + b[1];
-	b[0] = b[1] - b[0];
-	b[1] = b[1] - b[0];
+	rules_swap(a);
+	rules_swap(b);
 }
 
-void	rules_swap_a_and_b(int *a, int *b)
+void	rules_push(int *a, int *b)
 {
-	rules_swap_a(a);
-	rules_swap_b(b);
+	if (!b[0])
+		return ;
+	down_array(a, b[0]);
+	up_array(b);
 }
 
-// prend le 1er nb dans A en decalant le reste vers le haut et le met dans B en decalant le reste vers le bas
-void	rules_push_b(int *a, int *b)
+void	rules_rot(int *a)
 {
-	down_array(b, a[0]);
-	up_array(a);
+	int	index;
+	int	top;
+
+	top = a[0];
+	index = up_array(a);
+	a[index - 1] = top;
 }
 
-void	up_array(int *array)
+void	rules_rot_all(int *a, int *b)
+{
+	rules_rot(a);
+	rules_rot(b);
+}
+
+void	rules_reverse_rot(int *a)
+{
+	int	i;
+	int	top;
+
+	i = 0;
+	while (a[i])
+		i++;
+	top = a[i-1];
+	ft_printf("LAST: %i\n", top);
+	down_array(a, top);
+	a[i] = 0;
+}
+
+void	rules_reverse_rot_all(int *a, int *b)
+{
+	rules_reverse_rot(a);
+	rules_reverse_rot(b);
+}
+
+int	up_array(int *array)
 {
 	int	i;
 
@@ -39,20 +69,15 @@ void	up_array(int *array)
 		array[i] = array[i+1];
 		i++;
 	}
+	return (i);
 }
  void	down_array(int *array, int top)
 {
 	int	i;
 
-	//22 
-	//0
-	//0
-
 	i = 0;
 	while (array[i])
 		i++;
-	//i = 1
-
 	if (!i)
 		array[0] = top;
 	else
@@ -65,16 +90,4 @@ void	up_array(int *array)
 		}
 		array[i] = top;
 	}
-//	else
-//	{
-//		while (array[i - 1])
-//		{
-//			array[i] = array[i - 1];
-//			i++;
-//			if (i == 3)
-//				break;
-//		}
-//		array[0] = top;
-//	}
-	
 }

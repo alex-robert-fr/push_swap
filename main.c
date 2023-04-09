@@ -27,16 +27,26 @@ int	main(int argc, char *argv[])
 		return (0);
 	}
 	display(a, b, "init a and b");
-	rules_swap_a(a);
+
+	rules_swap(a);
 	display(a, b, "sa");
-	rules_push_b(a, b);
-	display(a, b, "pb");
-	rules_push_b(a, b);
-	display(a, b, "pb");
-	rules_push_b(a, b);
-	display(a, b, "pb");
-	rules_push_b(a, b);
-	display(a, b, "pb");
+	rules_push(b, a);
+	rules_push(b, a);
+	rules_push(b, a);
+	display(a, b, "pb pb pb");
+	rules_rot(a);
+	rules_rot(b);
+	display(a, b, "ra rb");
+	rules_reverse_rot(a);
+	rules_reverse_rot(b);
+	display(a, b, "rra rrb");
+	rules_swap(a);
+	display(a, b, "sa");
+	rules_push(a, b);
+	rules_push(a, b);
+	rules_push(a, b);
+	display(a, b, "pa pa pa");
+
 	free(a);
 	free(b);
 	free(tmp);
