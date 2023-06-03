@@ -1,7 +1,8 @@
 NAME		=	push_swap
 CC			=	clang
-SRC			=	main.c \
-				rules.c
+SRC			=	main.c		\
+				rules.c		\
+				radix.c
 CFLAGS		=	-Ilibft -Ilibft/ft_printf -Wextra -Wall -Werror -g
 LIBFT_PATH	=	libft/
 LIBFT_NAME	=	libft.a

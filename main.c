@@ -26,27 +26,7 @@ int	main(int argc, char *argv[])
 		free(tmp);
 		return (0);
 	}
-	display(a, b, "init a and b");
-
-	rules_swap(a);
-	display(a, b, "sa");
-	rules_push(b, a);
-	rules_push(b, a);
-	rules_push(b, a);
-	display(a, b, "pb pb pb");
-	rules_rot(a);
-	rules_rot(b);
-	display(a, b, "ra rb");
-	rules_reverse_rot(a);
-	rules_reverse_rot(b);
-	display(a, b, "rra rrb");
-	rules_swap(a);
-	display(a, b, "sa");
-	rules_push(a, b);
-	rules_push(a, b);
-	rules_push(a, b);
-	display(a, b, "pa pa pa");
-
+	radix(a, b);
 	free(a);
 	free(b);
 	free(tmp);
@@ -143,7 +123,7 @@ void	display(int *a, int *b, char *str)
 	ft_printf("=========\n");
 	while (a[i] || b[i])
 	{
-		ft_printf("%4i %i\n", a[i], b[i]);
+		ft_printf("%5i %i\n", a[i], b[i]);
 		i++;
 	}
 	ft_printf("----------------------------\n");

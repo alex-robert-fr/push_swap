@@ -19,6 +19,9 @@ int		*insert_args_to_array(char **str, int size);
 int		check_array(int *nums);
 // affiche les tableau
 void	display(int *a, int *b, char *str);
-
+// algo
+void	radix(int *a, int *b);
+int		max_number(int *a);
+int		lower_number(int *a);
 #endif
 
