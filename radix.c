@@ -6,16 +6,17 @@
 /*   By: alrobert <alrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 16:39:23 by alrobert          #+#    #+#             */
-/*   Updated: 2023/04/09 16:39:25 by alrobert         ###   ########.fr       */
+/*   Updated: 2023/06/07 15:46:54 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "ft_printf.h"
 #include "push_swap.h"
 #include "rules.h"
 #include <stddef.h>
 
-void	radix(int *a, int *b)
+void	radix(int *a, int *b, int size)
 {
 	int 	i;
 	int		max;
@@ -28,24 +29,18 @@ void	radix(int *a, int *b)
 	min = lower_number(a);
 	len_max = ft_nblen(max);
 	len_min = ft_nblen(min);
-	display(a, b, "Init a and b");
-	ft_printf("MAX: %i, LEN: %i, MIN: %i, LEN: %i\n", max, len_max, min, len_min);
-//	while (i > 0)
-//	{
-//		i = 0;
-//	ft_printf("a[%i] = %i, len_max = %i\n", a[i], ft_nblen(a[i]), len_max);
-		while (i < 22)
+	display(a, b, "Init a and b", size);
+	ft_printf("MAX: %i, LEN: %i, MIN: %i, LEN: %i, SIZE: %i\n", max, len_max, min, len_min, size);
+	while (i < 7) {
+		if (a[0] % 10 > a[1] % 10)
 		{
-			if (ft_nblen(a[0]) == len_max)
-				rules_push(b, a);
-			else
-				rules_rot(a);
-			if (i == 12)
-				len_max = ft_nblen(max_number(a));
-			i++;
+			ft_printf("last number => %i\n", a[0] % 10);
+			rules_swap(a);
 		}
-//	}
-	display(a, b, "Push");
+		rules_push(b, a);
+		display(a, b, "Swap A", size);
+		i++;
+	}
 }
 
 int	max_number(int *a)

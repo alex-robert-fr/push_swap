@@ -4,20 +4,23 @@
 #include "push_swap.h"
 #include "rules.h"
 
+// PASS
 int	main(int argc, char *argv[])
 {
 	int	*a;
 	int	*b;
+	int	size;
 	int	**tmp;
 
 	if (argc < 2)
 		return (0);
 	else if (argc == 2)
-		tmp = init_tab(argv[1], 1);
+		tmp = init_tab(argv[1]);
 	else
-		tmp = init_tab(argv, 0);
+		return (1);
 	a = tmp[0];
 	b = tmp[1];
+	size = tmp[2][0];
 	if (check_array(tmp[0]))
 	{
 		ft_printf("Error\n");
@@ -26,33 +29,27 @@ int	main(int argc, char *argv[])
 		free(tmp);
 		return (0);
 	}
-	radix(a, b);
+	radix(a, b, size);
 	free(a);
 	free(b);
 	free(tmp);
 	return (0);
 }
 
-int	**init_tab(void *str, int one_arg)
+// PASS
+int	**init_tab(void *str)
 {
 	int	**tabs;
-	int	tab_size;
 	
-	tabs = ft_calloc(2, sizeof(int*));
-	if (one_arg)
-	{
-		ft_printf("ONE ARG\n");
-		tab_size = get_size_arg((char*)str) + 1;
-		tabs[0] = insert_arg_to_array((char*)str, tab_size);
-		tabs[1] = ft_calloc(tab_size, sizeof(int));
-	}
-	else
-	{
-		ft_printf("ARGS\n");
-	}
+	tabs = ft_calloc(3, sizeof(int*));
+	tabs[2] = ft_calloc(2, sizeof(int));
+	tabs[2][0] = get_size_arg((char*)str) + 1;
+	tabs[0] = insert_arg_to_array((char*)str, tabs[2][0]);
+	tabs[1] = ft_calloc(tabs[2][0], sizeof(int));
 	return (tabs);
 }
-                                                      
+
+// PASS
 int	get_size_arg(char *str)
 {
 	int	i;
@@ -62,15 +59,17 @@ int	get_size_arg(char *str)
 	count_num = 0;
 	while (str[i])
 	{
-		if ((!i && ft_isdigit(str[i])) || (i && ft_isdigit(str[i]) && ft_find_char(str[i-1], " +-")))
+		if (ft_isdigit(str[i]) && (!i || ft_find_char(str[i-1], " +-")))
 			count_num++;
 		if (!ft_find_char(str[i], " +-") && !ft_isdigit(str[i]))
 			return (0);
 		i++;
 	}
+	ft_printf("COUNT: %i\n", count_num);
 	return (count_num);
 }
 
+// PASS
 int	*insert_arg_to_array(char *str, int	size)
 {
 	int	*a;
@@ -82,13 +81,15 @@ int	*insert_arg_to_array(char *str, int	size)
 	i_tab = 0;
 	while (str[i])
 	{
-		if ((!i && ft_isdigit(str[i])) || (i && ft_isdigit(str[i]) && ft_find_char(str[i-1], " +-")))
+		if ((!i || ft_find_char(str[i-1], " +-")) && ft_isdigit(str[i]))
 		{
+			ft_printf("Hello %s\n", str + i);
 			a[i_tab] = ft_atoi(str + i);
 			i_tab++;
 		}
 		i++;
 	}
+	ft_printf("A0 == %i\n", a[0]);
 	return (a);
 }
 
@@ -112,16 +113,18 @@ int	check_array(int *nums)
 	return (0);
 }
 
-void	display(int *a, int *b, char *str)
+// PASS
+void	display(int *a, int *b, char *str, int size)
 {
 	int	i;
 
 	i = 0;
+	ft_printf("LENNNN: %i\n", a[0]);
 	ft_printf("%s\n", str);
 	ft_printf("----------------------------\n");
 	ft_printf("   a b\n");
 	ft_printf("=========\n");
-	while (a[i] || b[i])
+	while (i < size)
 	{
 		ft_printf("%5i %i\n", a[i], b[i]);
 		i++;

@@ -5,7 +5,7 @@
 // avoir 2 array alloc
 
 // Parsing
-int		**init_tab(void *str, int one_arg);
+int		**init_tab(void *str);
 // savoir quelle type d'entrer il y a
 // compter le nombre de nombres entrer
 int		get_size_arg(char *str);
@@ -18,9 +18,9 @@ int		*insert_args_to_array(char **str, int size);
 // Verifie les nombre dans l'array A
 int		check_array(int *nums);
 // affiche les tableau
-void	display(int *a, int *b, char *str);
+void	display(int *a, int *b, char *str, int size);
 // algo
-void	radix(int *a, int *b);
+void	radix(int *a, int *b, int size);
 int		max_number(int *a);
 int		lower_number(int *a);
 #endif

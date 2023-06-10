@@ -1,12 +1,17 @@
 #include "rules.h"
 #include "libft.h"
+#include "ft_printf.h"
 #include "push_swap.h"
 
 void	rules_swap(int *a)
 {
-	a[1] = a[0] + a[1];
-	a[0] = a[1] - a[0];
-	a[1] = a[1] - a[0];
+
+	if (a[1] != '\0')
+	{
+		a[1] = a[0] + a[1];
+		a[0] = a[1] - a[0];
+		a[1] = a[1] - a[0];
+	}
 }
 
 void	rules_swap_all(int *a, int *b)
