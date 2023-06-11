@@ -8,11 +8,9 @@ void	rules_swap(int *a, int size, char *str)
 	ft_printf("%s\n", str);
 	if (size > 1)
 	{
-		ft_printf("Before: %i\n", a[0]);
 		a[1] = a[0] + a[1];
 		a[0] = a[1] - a[0];
 		a[1] = a[1] - a[0];
-		ft_printf("After: %i\n", a[0]);
 	}
 }
 
@@ -25,10 +23,8 @@ void	rules_swap_all(int *a, int *b, int size)
 void	rules_push(int *a, int *b, int size, char *str)
 {
 	ft_printf("%s\n", str);
-	ft_printf("Before: a%i b%i\n", a[0], b[0]);
-	down_array(a, b[0]);
+	down_array2(a, b[0]);
 	up_array(b, size);
-	ft_printf("After: a%i b%i\n", a[0], b[0]);
 	(void)size;
 }
 
@@ -49,24 +45,19 @@ void	rules_rot_all(int *a, int *b, int size)
 	rules_rot(b, size, "rb");
 }
 
-void	rules_reverse_rot(int *a, char *str)
+void	rules_reverse_rot(int *a, int size, char *str)
 {
-	int	i;
 	int	top;
 
 	ft_printf("%s\n", str);
-	i = 0;
-	while (a[i])
-		i++;
-	top = a[i-1];
+	top = a[size-1];
 	down_array(a, top);
-	a[i] = 0;
 }
 
-void	rules_reverse_rot_all(int *a, int *b)
+void	rules_reverse_rot_all(int *a, int *b, int size)
 {
-	rules_reverse_rot(a, "rra");
-	rules_reverse_rot(b, "rrb");
+	rules_reverse_rot(a, size, "rra");
+	rules_reverse_rot(b, size, "rrb");
 }
 
 int	up_array(int *array, int size)
@@ -92,7 +83,26 @@ int	up_array(int *array, int size)
 		array[0] = top;
 	else
 	{
+		i--;
+		while (i)
+		{
+			array[i] = array[i - 1];
+			i--;
+		}
+		array[i] = top;
+	}
+}
+ void	down_array2(int *array, int top)
+{
+	int	i;
 
+	i = 0;
+	while (array[i])
+		i++;
+	if (!i)
+		array[0] = top;
+	else
+	{
 		while (i)
 		{
 			array[i] = array[i - 1];

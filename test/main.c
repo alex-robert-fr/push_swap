@@ -44,6 +44,15 @@ START_TEST(test_push_rule_hard)
 	ck_assert_mem_eq(b, b_result, size);
 }
 
+START_TEST(test_rra)
+{
+	int	a[] = {1, 2, 4, 5, 3, 90};
+	int	a_result[] = {90, 1, 2, 4, 5, 3};
+	size_t size = sizeof(a) / sizeof(a[0]);
+
+	rules_reverse_rot(a, 6, "pa");
+	ck_assert_mem_eq(a, a_result, size);
+}
 
 // Test suite
 Suite *my_test_suite(void)
@@ -59,6 +68,8 @@ Suite *my_test_suite(void)
     tc = tcase_create("Push Rule");
     tcase_add_test(tc, test_push_rule);
     tcase_add_test(tc, test_push_rule_hard);
+	tc = tcase_create("Reverse Rotate");
+	tcase_add_test(tc, test_rra);
     suite_add_tcase(s, tc);
 
     return s;

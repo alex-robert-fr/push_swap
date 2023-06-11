@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 10:47:34 by alex              #+#    #+#             */
-/*   Updated: 2023/06/11 15:55:59 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/11 16:35:00 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	algo5(int *a, int *b, int size)
 		}
 		display(a, b, "After Sort 5", size);
 		while (i > 1) {
-			rules_reverse_rot(a, "rra");
+			rules_reverse_rot(a, size, "rra");
 			i--;
 			display(a, b, "Reverse sort", size);
 		}
