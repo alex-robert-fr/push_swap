@@ -85,13 +85,11 @@ int	*insert_arg_to_array(char *str, int	size)
 	{
 		if ((!i || ft_find_char(str[i-1], " +-")) && ft_isdigit(str[i]))
 		{
-			ft_printf("Hello %s\n", str + i);
 			a[i_tab] = ft_atoi(str + i);
 			i_tab++;
 		}
 		i++;
 	}
-	ft_printf("A0 == %i\n", a[0]);
 	return (a);
 }
 
