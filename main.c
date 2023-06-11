@@ -12,15 +12,16 @@ int	main(int argc, char *argv[])
 	int	size;
 	int	**tmp;
 
-	if (argc < 2)
-		return (0);
-	else if (argc == 2)
+	if (argc == 2)
 		tmp = init_tab(argv[1]);
 	else
 		return (1);
 	a = tmp[0];
 	b = tmp[1];
 	size = tmp[2][0];
+	if (size == 3)
+		algo3(a, b);
+	/*
 	if (check_array(tmp[0]))
 	{
 		ft_printf("Error\n");
@@ -30,6 +31,7 @@ int	main(int argc, char *argv[])
 		return (0);
 	}
 	radix(a, b, size);
+	*/
 	free(a);
 	free(b);
 	free(tmp);
@@ -43,7 +45,7 @@ int	**init_tab(void *str)
 	
 	tabs = ft_calloc(3, sizeof(int*));
 	tabs[2] = ft_calloc(2, sizeof(int));
-	tabs[2][0] = get_size_arg((char*)str) + 1;
+	tabs[2][0] = get_size_arg((char*)str);
 	tabs[0] = insert_arg_to_array((char*)str, tabs[2][0]);
 	tabs[1] = ft_calloc(tabs[2][0], sizeof(int));
 	return (tabs);

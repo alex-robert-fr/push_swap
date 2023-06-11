@@ -20,6 +20,7 @@ int		check_array(int *nums);
 // affiche les tableau
 void	display(int *a, int *b, char *str, int size);
 // algo
+void	algo3(int *a, int *b);
 void	radix(int *a, int *b, int size);
 int		max_number(int *a);
 int		lower_number(int *a);
