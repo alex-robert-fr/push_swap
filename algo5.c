@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 10:47:34 by alex              #+#    #+#             */
-/*   Updated: 2023/06/11 15:53:18 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/11 15:55:59 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,6 @@ void	algo5(int *a, int *b, int size)
 		}
 			display(a, b, "After Reverse sort", size);
 	}
-	/*
-	rules_push(a, b, "pa");
-	top_number = a[0];
-	while (i < 5) {
-		if (top_number > a[1])
-		{
-			rules_swap(a, "sa");
-			rules_rot(a, "ra");
-		}
-		else
-			break ;
-		i++;
-	}
-	while (i > 1) {
-		rules_reverse_rot(a, "rra");
-		i--;
-	}
-	*/
 }
 
 int	max_number(int *a, int size)
