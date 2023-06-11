@@ -5,10 +5,10 @@ SRC			=	rules.c		\
 				algo5.c
 ALL_SRC		=	main.c \
 				$(SRC)
-TEST_SRC	=	test/main.c	\
-				test/test.c	\
-				test/rules.c
+TEST_SRC	=	test/main.c \
+				$(SRC)
 CFLAGS		=	-Ilibft/includes -Ilibft/includes/ft_printf -Itest -Wextra -Wall -Werror -g
+CFLAGSTEST	=	-lcheck
 LIBFT_PATH	=	libft/
 LIBFT_NAME	=	libft.a
 LIBFT		=	$(LIBFT_PATH)$(LIBFT_NAME)
@@ -39,4 +39,4 @@ re: fclean all
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 test_$(NAME): $(LIBFT_NAME) $(OBJ_TEST_SRC)
-	$(CC) $(CFLAGS) $(OBJ_TEST_SRC) $(LIBFT) -o $@
+	$(CC) $(CFLAGSTEST) $(OBJ_TEST_SRC) $(LIBFT) -o $@ 

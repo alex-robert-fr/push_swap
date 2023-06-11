@@ -26,9 +26,9 @@ int		check_array(int *nums);
 void	display(int *a, int *b, char *str, int size);
 // algo
 void	algo3(int *a, int *b);
-void	algo5(int *a, int *b);
+void	algo5(int *a, int *b, int size);
 void	radix(int *a, int *b, int size);
-int		max_number(int *a);
-int		lower_number(int *a);
+int		max_number(int *a, int size);
+int		lower_number(int *a, int size);
 #endif
 

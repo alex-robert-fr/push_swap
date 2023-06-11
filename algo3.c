@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 10:09:19 by alex              #+#    #+#             */
-/*   Updated: 2023/06/11 11:57:10 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/11 15:44:33 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@ void	algo3(int *a, int *b)
 	(void)b;
 	if (a[0] > a[1] && a[1] < a[2] && a[2] > a[0])
 	{
-		rules_swap(a, "sa");
+		rules_swap(a, 3, "sa");
 	}
 	else if (a[0] > a[1] && a[1] > a[2] && a[2] < a[0])
 	{
-		rules_swap(a, "sa");
+		rules_swap(a, 3, "sa");
 		rules_reverse_rot(a, "rra");
 	}
 	else if (a[0] > a[1] && a[1] < a[2] && a[2] < a[0])
 	{
-		rules_rot(a, "ra");
+		rules_rot(a, 3, "ra");
 	}
 	else if (a[0] < a[1] && a[1] > a[2] && a[2] > a[0])
 	{
-		rules_swap(a, "sa");
-		rules_rot(a, "ra");
+		rules_swap(a, 3, "sa");
+		rules_rot(a, 3, "ra");
 	}
 	else if (a[0] < a[1] && a[1] > a[2] && a[2] < a[0])
 	{

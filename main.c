@@ -21,8 +21,8 @@ int	main(int argc, char *argv[])
 	size = tmp[2][0];
 	if (size == 3)
 		algo3(a, b);
-	else if (size == 5)
-		algo5(a, b);
+	else
+		algo5(a, b, size);
 	/*
 	if (check_array(tmp[0]))
 	{
@@ -49,7 +49,7 @@ int	**init_tab(void *str)
 	tabs[2] = ft_calloc(2, sizeof(int));
 	tabs[2][0] = get_size_arg((char*)str);
 	tabs[0] = insert_arg_to_array((char*)str, tabs[2][0]);
-	tabs[1] = ft_calloc(tabs[2][0], sizeof(int));
+	tabs[1] = ft_calloc(tabs[2][0] + 1, sizeof(int));
 	return (tabs);
 }
 
@@ -79,7 +79,7 @@ int	*insert_arg_to_array(char *str, int	size)
 	int	i;
 	int	i_tab;
 
-	a = ft_calloc(size, sizeof(int));
+	a = ft_calloc(size + 1, sizeof(int));
 	i = 0;
 	i_tab = 0;
 	while (str[i])
@@ -114,23 +114,6 @@ int	check_array(int *nums)
 	return (0);
 }
 
-// PASS
-void	display(int *a, int *b, char *str, int size)
-{
-	int	i;
-
-	i = 0;
-	ft_printf("%s\n", str);
-	ft_printf("----------------------------\n");
-	ft_printf("   a b\n");
-	ft_printf("=========\n");
-	while (i < size)
-	{
-		ft_printf("%5i %i\n", a[i], b[i]);
-		i++;
-	}
-	ft_printf("----------------------------\n");
-}
 
 int	get_size_array(int *array)
 {
