@@ -56,7 +56,6 @@ void	rules_reverse_rot(int *a, char *str)
 	while (a[i])
 		i++;
 	top = a[i-1];
-	ft_printf("LAST: %i\n", top);
 	down_array(a, top);
 	a[i] = 0;
 }

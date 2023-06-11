@@ -4,6 +4,11 @@
 // recurpere arg[1] ou tout les arguments (./push_swap 1 23 43 32 12)
 // avoir 2 array alloc
 
+typedef struct s_info {
+	int min_number;
+	int	max_number;
+}	t_info;
+
 // Parsing
 int		**init_tab(void *str);
 // savoir quelle type d'entrer il y a

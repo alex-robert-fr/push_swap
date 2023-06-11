@@ -23,7 +23,6 @@ int	main(int argc, char *argv[])
 		algo3(a, b);
 	else if (size == 5)
 		algo5(a, b);
-	display(a, b, "Result", size);
 	/*
 	if (check_array(tmp[0]))
 	{
@@ -70,7 +69,6 @@ int	get_size_arg(char *str)
 			return (0);
 		i++;
 	}
-	ft_printf("COUNT: %i\n", count_num);
 	return (count_num);
 }
 

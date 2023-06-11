@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 10:47:34 by alex              #+#    #+#             */
-/*   Updated: 2023/06/11 11:50:31 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/11 12:33:05 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,60 @@
 
 void	algo5(int *a, int *b)
 {
-	int	i;
-	int	top_number;
+	int		i;
+	int		top_number;
+	t_info	info;
+	t_info	info_current;
 
-	ft_printf("ALGO5\n");
 	i = 1;
-	rules_push(b, a, "pb");	
-	rules_push(b, a, "pb");	
-	algo3(a, b);
-	rules_push(a, b, "pa");
-	top_number = a[0];
+	info.min_number = lower_number(a);
+	info.max_number = max_number(a);
+	ft_printf("MIN: %i, MAX: %i\n", info.min_number, info.max_number);
 	display(a, b, "Before", 5);
-	while (i < 5) {
-		ft_printf("%i: top: %i > a[i]: %i\n", i, top_number, a[i]);
-		if (top_number > a[1])
+	rules_push(b, a, "pb");	
+	rules_push(b, a, "pb");	
+	display(a, b, "Push", 5);
+	algo3(a, b);
+	display(a, b, "Algo 3", 5);
+	while (b[0] != 0) {
+		rules_push(a, b, "pa");
+		info_current.min_number = lower_number(a);
+		info_current.max_number = max_number(a);
+		display(a, b, "Push to A", 5);
+		if (a[0] == info_current.max_number)
 		{
-			rules_swap(a, "sa");
 			rules_rot(a, "ra");
-			display(a, b, "Pass", 5);
+			display(a, b, "Rotation", 5);
+			continue ;
 		}
-		else
-			break ;
-		i++;
+		top_number = a[0];
+		while (i < 5) {
+			display(a, b, "Sort 5", 5);
+			if (top_number > a[1])
+			{
+				rules_swap(a, "sa");
+				rules_rot(a, "ra");
+			}
+			else
+				break ;
+			i++;
+		}
+		display(a, b, "After Sort 5", 5);
+		while (i > 1) {
+			rules_reverse_rot(a, "rra");
+			i--;
+			display(a, b, "Reverse sort", 5);
+		}
+			display(a, b, "After Reverse sort", 5);
 	}
-	while (i > 1) {
-		rules_reverse_rot(a, "rra");
-		i--;
-	}
+	/*
 	rules_push(a, b, "pa");
 	top_number = a[0];
 	while (i < 5) {
-		ft_printf("%i: top: %i > a[i]: %i\n", i, top_number, a[i]);
 		if (top_number > a[1])
 		{
 			rules_swap(a, "sa");
 			rules_rot(a, "ra");
-			display(a, b, "Pass", 5);
 		}
 		else
 			break ;
@@ -61,5 +79,37 @@ void	algo5(int *a, int *b)
 		rules_reverse_rot(a, "rra");
 		i--;
 	}
-	ft_printf("I: %i", i);
+	*/
+}
+
+int	max_number(int *a)
+{
+	int	i;
+	int	max;
+
+	i = 0;
+	max = 0;
+	while (a[i])
+	{
+		if (a[i] > max)
+			max = a[i];
+		i++;
+	}
+	return (max);
+}
+
+int	lower_number(int *a)
+{
+	int	i;
+	int	low;
+
+	i = 0;
+	low = a[0];
+	while (a[i])
+	{
+		if (a[i] < low)
+			low = a[i];
+		i++;
+	}
+	return (low);
 }
