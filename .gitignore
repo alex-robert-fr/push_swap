@@ -1,3 +1,5 @@
 .cache/
 *.json
 *.o
+push_swap-testeur-max/
+visualizer-push-swap/

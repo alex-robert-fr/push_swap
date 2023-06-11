@@ -21,6 +21,9 @@ int	main(int argc, char *argv[])
 	size = tmp[2][0];
 	if (size == 3)
 		algo3(a, b);
+	else if (size == 5)
+		algo5(a, b);
+	display(a, b, "Result", size);
 	/*
 	if (check_array(tmp[0]))
 	{
@@ -119,7 +122,6 @@ void	display(int *a, int *b, char *str, int size)
 	int	i;
 
 	i = 0;
-	ft_printf("LENNNN: %i\n", a[0]);
 	ft_printf("%s\n", str);
 	ft_printf("----------------------------\n");
 	ft_printf("   a b\n");
