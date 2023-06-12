@@ -3,7 +3,8 @@ CC			=	clang
 SRC			=	rules.c		\
 				algo3.c		\
 				algo5.c		\
-				algo2000.c
+				algo2000.c	\
+				algo3000.c
 ALL_SRC		=	main.c \
 				$(SRC)
 TEST_SRC	=	test/main.c \

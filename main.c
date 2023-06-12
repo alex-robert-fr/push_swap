@@ -24,7 +24,7 @@ int	main(int argc, char *argv[])
 	else if (size == 5)
 		algo5(a, b, 5);
 	else
-		algo2000(a, b, size);
+		algo3000(a, b, size);
 	/*
 	if (check_array(tmp[0]))
 	{

@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 15:58:31 by alex              #+#    #+#             */
-/*   Updated: 2023/06/11 17:56:22 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/12 00:17:49 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void algo2000(int *a, int *b, int size)
 	while (i_global < size)
 	{
 		info.min_number = lower_number(a, a_size);
-		display(a, b, "Init", size);
-		ft_printf("LOW NUMBER = %i\n", info.min_number);
-		ft_printf("POSITION NUMBER: %i, TAB_SIZE: %i\n", get_position_number(a, info.min_number, size), size);
+	//	display(a, b, "Init", size);
+	//	ft_printf("LOW NUMBER = %i\n", info.min_number);
+	//	ft_printf("POSITION NUMBER: %i, TAB_SIZE: %i\n", get_position_number(a, info.min_number, size), size);
 		i = 0;
 		if (size / 2 >= get_position_number(a, info.min_number, size))
 		{
@@ -46,13 +46,13 @@ void algo2000(int *a, int *b, int size)
 			while (i < number_rot)
 			{
 				rules_reverse_rot(a, a_size, "rra");
-				display(a, b, "LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", size);
+	//			display(a, b, "LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", size);
 				i++;
 			}
 		}
-		display(a, b, "Reverse", size);
+	//	display(a, b, "Reverse", size);
 		rules_push(b, a, a_size, "pb");
-		display(a, b, "Push B", size);
+	//	display(a, b, "Push B", size);
 		a_size--;
 		i_global++;
 	}
@@ -60,7 +60,7 @@ void algo2000(int *a, int *b, int size)
 	while (i < size)
 	{
 		rules_push(a, b, size, "pa");
-		display(a, b, "push to A", size);
+	//	display(a, b, "push to A", size);
 		i++;
 	}
 }

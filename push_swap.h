@@ -28,6 +28,7 @@ void	display(int *a, int *b, char *str, int size);
 void	algo3(int *a, int *b);
 void	algo5(int *a, int *b, int size);
 void	algo2000(int *a, int *b, int size);
+void	algo3000(int *a, int *b, int size);
 void	radix(int *a, int *b, int size);
 int		max_number(int *a, int size);
 int		lower_number(int *a, int size);
