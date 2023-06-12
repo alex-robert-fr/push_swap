@@ -2,7 +2,7 @@
 #include "../rules.h"
 
 // Test case
-START_TEST(test_swap_rule)
+START_TEST(test_swap_rules)
 {
 	int	a[] = {1, 2, 4, 5};
 	int	b[] = {2, 1, 4, 5};
@@ -11,8 +11,8 @@ START_TEST(test_swap_rule)
 	size_t size = sizeof(a) / sizeof(a[0]);
 	size_t size2 = sizeof(c) / sizeof(c[0]);
 
-	rules_swap(a, 4, "sa");
-	rules_swap(c, 1, "sa");
+	swap_a(a, 4);
+	swap_a(c, 1);
 	ck_assert_mem_eq(a, b, size * sizeof(int));
 	ck_assert_mem_eq(c, d, size2 * sizeof(int));
 }
@@ -63,7 +63,7 @@ Suite *my_test_suite(void)
     s = suite_create("Test Rules");
 
     tc = tcase_create("Swap Rule");
-    tcase_add_test(tc, test_swap_rule);
+    tcase_add_test(tc, test_swap_rules);
     suite_add_tcase(s, tc);
     tc = tcase_create("Push Rule");
     tcase_add_test(tc, test_push_rule);

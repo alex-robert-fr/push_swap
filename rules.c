@@ -35,6 +35,10 @@ void	rules_rot(int *a, int size, char *str)
 
 	ft_printf("%s\n", str);
 	top = a[0];
+	//ft_printf("SIZE: %i RULES_ROT: %i\n", size, a[size]);
+	while(a[size] > 0)
+		size++;
+	//ft_printf("AFTER SIZE: %i RULES_ROT: %i\n", size, a[size]);
 	index = up_array(a, size);
 	a[index - 1] = top;
 }

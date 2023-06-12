@@ -1,6 +1,7 @@
 NAME		=	push_swap
 CC			=	clang
 SRC			=	rules.c		\
+				rules2000.c	\
 				algo3.c		\
 				algo5.c		\
 				algo2000.c	\

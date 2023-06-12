@@ -19,13 +19,14 @@ int	main(int argc, char *argv[])
 	a = tmp[0];
 	b = tmp[1];
 	size = tmp[2][0];
+	algo3000(a, b, size);
+	/*
 	if (size == 3)
 		algo3(a, b);
 	else if (size == 5)
 		algo5(a, b, 5);
 	else
 		algo3000(a, b, size);
-	/*
 	if (check_array(tmp[0]))
 	{
 		ft_printf("Error\n");
