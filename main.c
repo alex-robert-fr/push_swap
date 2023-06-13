@@ -19,24 +19,9 @@ int	main(int argc, char *argv[])
 	a = tmp[0];
 	b = tmp[1];
 	size = tmp[2][0];
+	display(a, b, "INIT", size);
 	algo3000(a, b, size);
-	/*
-	if (size == 3)
-		algo3(a, b);
-	else if (size == 5)
-		algo5(a, b, 5);
-	else
-		algo3000(a, b, size);
-	if (check_array(tmp[0]))
-	{
-		ft_printf("Error\n");
-		free(a);
-		free(b);
-		free(tmp);
-		return (0);
-	}
-	radix(a, b, size);
-	*/
+	display(a, b, "FINAL", size);
 	free(a);
 	free(b);
 	free(tmp);

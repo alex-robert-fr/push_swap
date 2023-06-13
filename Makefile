@@ -2,9 +2,6 @@ NAME		=	push_swap
 CC			=	clang
 SRC			=	rules.c		\
 				rules2000.c	\
-				algo3.c		\
-				algo5.c		\
-				algo2000.c	\
 				algo3000.c
 ALL_SRC		=	main.c \
 				$(SRC)
@@ -43,3 +40,6 @@ re: fclean all
 
 test_$(NAME): $(LIBFT_NAME) $(OBJ_TEST_SRC)
 	$(CC) $(CFLAGSTEST) $(OBJ_TEST_SRC) $(LIBFT) -o $@ 
+
+test: test_$(NAME)
+	./$^ -v | ./test/greenest

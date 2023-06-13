@@ -5,65 +5,73 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/12 11:53:25 by alex              #+#    #+#             */
-/*   Updated: 2023/06/12 13:40:24 by alex             ###   ########.fr       */
+/*   Created: 2023/06/13 12:51:40 by alex              #+#    #+#             */
+/*   Updated: 2023/06/13 14:26:00 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "libft.h"
 #include "push_swap.h"
-#include "rules.h"
+#include "rules2000.h"
+
 void	algo3000(int *a, int *b, int size)
 {
-	int	i;
-	int	split;
-	int	max_num;
+	int *size_a;
+	int	*size_b;
 
-	(void)a;
-	(void)b;
-	split = size / 2;
-	max_num = max_number(a, size);
-	ft_printf("\x1b[36mSPLIT\x1b[0m: %i\n", split);
-	ft_printf("\x1b[36mMAX\x1b[0m: %i\n", max_num);
-	display(a, b, "Init", size);
-	i = 0;
-	while (i < split) {
-		if (a[0] == max_num)
-		{
-			rules_rot(a, size - i, "ra");
-			rules_push(b, a, size, "pb");
-		}
-		else
-			rules_push(b, a, size, "pb");
-		i++;
-	}
-	display(a, b, "Push B", size);
-	//if (size % 2 == 1)
-	//	split++;
-	//ft_printf("\x1b[36mSPLIT\x1b[0m: %i\n", split);
+	size_a = ft_calloc(1, sizeof(int));
+	size_b = ft_calloc(1, sizeof(int));
+	*size_a = size;
+	push_b(a, b, size_a, size_b, 0);
+	push_b(a, b, size_a, size_b, 0);
+	push_b(a, b, size_a, size_b, 0);
+	push_b(a, b, size_a, size_b, 0);
+	push_b(a, b, size_a, size_b, 0);
+	find_cheapest_number(a, b, size_a, size_b);
+}
+
+int	find_cheapest_number(int *a, int *b, int *size_a, int *size_b)
+{
+	int	*copy_a;
+	int	*copy_b;
+	int size = 10;
+	int *cp_size_a;
+	int *cp_size_b;
+
+	cp_size_a = int_copy(*size_a);
+	cp_size_b = int_copy(*size_b);
+	ft_printf("COPY SIZE A: %i\n", *cp_size_a);
+	ft_printf("COPY SIZE B: %i\n", *cp_size_b);
+	copy_a = tab_copy(a, size);
+	copy_b = tab_copy(b, size);
+	push_b(copy_a, copy_b, cp_size_a, cp_size_b, 1);
+	display(copy_a, copy_b, "Cheapest Number COPY", size);
+	return (0);
+}
+
+int	*tab_copy(int *original, int size)
+{
+	int	i;
+	int	*copy;
+
+	copy = ft_calloc(size, sizeof(int));
+	if (!copy)
+		return (NULL);
 	i = 0;
 	while (i < size)
 	{
-		ft_printf("%i < %i ?\n", a[0], b[0]);
-		if (a[0] < b[0])
-		{
-			ft_printf("PASS");
-			rules_push(a, b, size, "pa");
-			//display(a, b, "IN WHILE PA", size);
-
-			rules_rot(a, size - i, "ra");
-			//display(a, b, "IN WHILE RA", size);
-			
-			rules_push(b, a, size, "pb");
-			//display(a, b, "IN WHILE PB", size);
-
-			rules_rot(b, size - i, "rb");
-			//display(a, b, "IN WHILE RB", size);
-		}
-		else
-			rules_rot_all(a, b, size - i);
+		copy[i] = original[i];
 		i++;
-		display(a, b, "IN WHILE", size);
 	}
-	display(a, b, "First sort", size);
+	return (copy);
+}
+
+int	*int_copy(int original)
+{
+	int	*copy;
+
+	copy = ft_calloc(1, sizeof(int));
+	*copy = original;
+	return (copy);
 }

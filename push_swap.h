@@ -33,5 +33,12 @@ void	radix(int *a, int *b, int size);
 int		max_number(int *a, int size);
 int		lower_number(int *a, int size);
 int		get_position_number(int *tab, int find, int size);
+
+
+
+
+int	find_cheapest_number(int *a, int *b, int *size_a, int *size_b);
+int	*tab_copy(int *original, int size);
+int	*int_copy(int original);
 #endif
 
