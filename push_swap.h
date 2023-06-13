@@ -5,8 +5,11 @@
 // avoir 2 array alloc
 
 typedef struct s_info {
-	int min_number;
-	int	max_number;
+	int min_b;
+	int	max_b;
+	int	nb_move;
+	int	min_move;
+	int	nb_min_move;
 }	t_info;
 
 // Parsing
@@ -30,16 +33,18 @@ void	algo5(int *a, int *b, int size);
 void	algo2000(int *a, int *b, int size);
 void	algo3000(int *a, int *b, int size);
 void	radix(int *a, int *b, int size);
-int		max_number(int *a, int size);
 int		lower_number(int *a, int size);
 int		get_position_number(int *tab, int find, int size);
 
 
 
 
-int	find_cheapest_number(int *a, int *b, int *size_a, int *size_b);
+int	find_cheapest_number(int *a, int *b, int *size_a, int *size_b, int index, t_info *info);
+int	test_move_one_number(int *a, int *b, int *size_a, int *size_b, int index, t_info *info);
 int	*tab_copy(int *original, int size);
 int	*int_copy(int original);
 int	init_copy_size(int *cp_size_a, int *size_a, int *cp_size_b, int *size_b);
+int	max_number(int *tab, int size);
+int	lower_number(int *a, int size);
 #endif
 
