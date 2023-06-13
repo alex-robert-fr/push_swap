@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:51:40 by alex              #+#    #+#             */
-/*   Updated: 2023/06/13 18:41:54 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/13 18:48:42 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,27 @@ int	test_move_one_number(int *a, int *b, int *size_a, int *size_b, int index, t_
 
 	i = 0;
 	find_max = 0;
-	while (i < index)
+	if (index < *size_a/2)
 	{
-		rotate_a(a, *size_a, 0);
-		info->nb_move++;
-		i++;
+		ft_printf("HAUT\n");
+		while (i < index)
+		{
+			rotate_a(a, *size_a, 0);
+			info->nb_move++;
+			i++;
+		}
 	}
+	else
+	{
+		ft_printf("BAS\n");
+		while (i < (*size_a-index))
+		{
+			reverse_rotate_a(a, *size_a, 0);
+			info->nb_move++;
+			i++;
+		}
+	}
+	
 	ft_printf("MAX IN B: %i\n", info->max_b);
 	ft_printf("MIN IN B: %i\n", info->min_b);
 	display(a, b, "IN FIND GOOD NUM", 10);
