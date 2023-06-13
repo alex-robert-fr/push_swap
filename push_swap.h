@@ -40,5 +40,6 @@ int		get_position_number(int *tab, int find, int size);
 int	find_cheapest_number(int *a, int *b, int *size_a, int *size_b);
 int	*tab_copy(int *original, int size);
 int	*int_copy(int original);
+int	init_copy_size(int *cp_size_a, int *size_a, int *cp_size_b, int *size_b);
 #endif
 

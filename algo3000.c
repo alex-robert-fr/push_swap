@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:51:40 by alex              #+#    #+#             */
-/*   Updated: 2023/06/13 14:26:00 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/13 14:40:04 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ void	algo3000(int *a, int *b, int size)
 	*size_a = size;
 	push_b(a, b, size_a, size_b, 0);
 	push_b(a, b, size_a, size_b, 0);
-	push_b(a, b, size_a, size_b, 0);
-	push_b(a, b, size_a, size_b, 0);
-	push_b(a, b, size_a, size_b, 0);
 	find_cheapest_number(a, b, size_a, size_b);
 }
 
@@ -39,17 +36,40 @@ int	find_cheapest_number(int *a, int *b, int *size_a, int *size_b)
 	int *cp_size_a;
 	int *cp_size_b;
 
-	cp_size_a = int_copy(*size_a);
-	cp_size_b = int_copy(*size_b);
-	ft_printf("COPY SIZE A: %i\n", *cp_size_a);
-	ft_printf("COPY SIZE B: %i\n", *cp_size_b);
-	copy_a = tab_copy(a, size);
-	copy_b = tab_copy(b, size);
+	init_copy_size(cp_size_a, size_a, cp_size_b, size_b);
 	push_b(copy_a, copy_b, cp_size_a, cp_size_b, 1);
 	display(copy_a, copy_b, "Cheapest Number COPY", size);
 	return (0);
 }
 
+int	init_copy_size(int *cp_size_a, int *size_a, int *cp_size_b, int *size_b)
+{
+	cp_size_a = int_copy(*size_a);
+	cp_size_b = int_copy(*size_b);
+	if (!cp_size_a || !cp_size_b)
+	{
+		cp_size_a = NULL;
+		cp_size_b = NULL;
+		return (0);
+	}
+	return (1);
+}
+
+int	init_copy_tab(int *copy_a, int *a, int *copy_b, int *b)
+{
+	int	size;
+
+	size = 10;
+	copy_a = tab_copy(a, size);
+	copy_b = tab_copy(b, size);
+	if (!copy_a || !copy_b)
+	{
+		copy_a = NULL;
+		copy_b = NULL;
+		return (0);
+	}
+	return (1);
+}
 int	*tab_copy(int *original, int size)
 {
 	int	i;
