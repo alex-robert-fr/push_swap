@@ -18,7 +18,7 @@ typedef struct s_stack {
 }	t_stack;
 
 // Parsing
-int		**init_tab(void *str);
+int		**init_tab(char **str, int is_multi);
 // savoir quelle type d'entrer il y a
 // compter le nombre de nombres entrer
 int		get_size_arg(char *str);
