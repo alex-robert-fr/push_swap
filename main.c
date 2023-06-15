@@ -9,7 +9,7 @@ int	main(int argc, char *argv[])
 {
 	int	*a;
 	int	*b;
-	int	size;
+	int	*size;
 	int	**tmp;
 
 	if (argc == 2)
@@ -18,10 +18,11 @@ int	main(int argc, char *argv[])
 		return (1);
 	a = tmp[0];
 	b = tmp[1];
-	size = tmp[2][0];
-	display(a, b, "INIT", size);
-	algo3000(a, b, size);
-	display(a, b, "FINAL", size);
+	size = ft_calloc(1, sizeof(int));
+	*size = tmp[2][0];
+//	display(a, b, "INIT", *size);
+	algo4000(a, b, size);
+//	display(a, b, "FINAL", *size);
 	free(a);
 	free(b);
 	free(tmp);

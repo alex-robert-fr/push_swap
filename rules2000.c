@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:44:03 by alex              #+#    #+#             */
-/*   Updated: 2023/06/13 14:23:41 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/15 11:06:39 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 
 void	swap_ab(int *a, int *b, int size, int isTest)
 {
-	swap_a(a, size, isTest);
-	swap_b(b, size, isTest);
+	if (!isTest)
+		ft_printf("ss\n");
+	swap_a(a, size, 1);
+	swap_b(b, size, 1);
 }
 
 void	swap_a(int *a, int size, int isTest)
@@ -46,18 +48,18 @@ void	swap(int *tab, int size)
 	
 }
 
-void	push_a(int *a, int *b, int *size_a, int *size_b, int isTest)
+void	push_a(t_stack *a, t_stack *b, int isTest)
 {
 	if(!isTest)
 		ft_printf("pa\n");
-	push(b, a, size_b, size_a);
+	push(b->tab, a->tab, b->size, a->size);
 }
 
-void	push_b(int *a, int *b, int *size_a, int *size_b, int isTest)
+void	push_b(t_stack *a, t_stack *b, int isTest)
 {
 	if(!isTest)
 		ft_printf("pb\n");
-	push(a, b, size_a, size_b);
+	push(a->tab, b->tab, a->size, b->size);
 }
 
 void	push(int *start, int *end, int *size_start, int *size_end)
@@ -83,25 +85,25 @@ void	push(int *start, int *end, int *size_start, int *size_end)
 	(*size_start)--;
 }
 
-void	rotate_ab(int *a, int *b, int size_a, int size_b, int isTest)
+void	rotate_ab(t_stack *a, t_stack *b, int isTest)
 {
 	if(!isTest)
 		ft_printf("rr\n");
-	rotate_a(a, size_a, isTest);
-	rotate_b(b, size_b, isTest);
+	rotate_a(a, 1);
+	rotate_b(b, 1);
 }
-void	rotate_a(int *a, int size, int isTest)
+void	rotate_a(t_stack *a, int isTest)
 {
 	if(!isTest)
 		ft_printf("ra\n");
-	rotate(a, size);
+	rotate(a->tab, *a->size);
 }
 
-void	rotate_b(int *b, int size, int isTest)
+void	rotate_b(t_stack *b, int isTest)
 {
 	if(!isTest)
 		ft_printf("rb\n");
-	rotate(b, size);
+	rotate(b->tab, *b->size);
 }
 
 void	rotate(int *stack, int size)
@@ -121,26 +123,26 @@ void	rotate(int *stack, int size)
 	stack[size - 1] = tmp;
 }
 
-void	reverse_rotate_ab(int *a, int *b, int size_a, int size_b, int isTest)
+void	reverse_rotate_ab(t_stack *a, t_stack *b, int isTest)
 {
 	if(!isTest)
 		ft_printf("rrr\n");
-	reverse_rotate(a, size_a);
-	reverse_rotate(b, size_b);
+	reverse_rotate_a(a, 1);
+	reverse_rotate_b(b, 1);
 }
 
-void	reverse_rotate_a(int *a, int size, int isTest)
+void	reverse_rotate_a(t_stack *a, int isTest)
 {
 	if(!isTest)
 		ft_printf("rra\n");
-	reverse_rotate(a, size);
+	reverse_rotate(a->tab, *a->size);
 }
 
-void	reverse_rotate_b(int *b, int size, int isTest)
+void	reverse_rotate_b(t_stack *b, int isTest)
 {
 	if(!isTest)
 		ft_printf("rrb\n");
-	reverse_rotate(b, size);
+	reverse_rotate(b->tab, *b->size);
 }
 
 void	reverse_rotate(int *stack, int size)

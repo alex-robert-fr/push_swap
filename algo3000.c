@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:51:40 by alex              #+#    #+#             */
-/*   Updated: 2023/06/13 18:48:42 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/14 12:14:20 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,21 @@ void	algo3000(int *a, int *b, int size)
 		ft_printf("--------------INDEX %i------------------\n", i);
 		find_cheapest_number(a, b, size_a, size_b, i, info);
 		ft_printf("--------------FIN %i--------------------\n", i);
+		i++;
+	}
+	ft_printf("BEST NUMBER IS: %i\n", a[info->nb_min_move]);
+	test_move_one_number(a,b, size_a, size_b, 0, info);
+	info->max_b = max_number(b, *size_b);
+	info->min_b = lower_number(b, *size_b);
+	info->min_move = 0;
+	info->nb_min_move = a[0];
+	i = 0;
+	while (i < *size_a)
+	{
+		info->nb_move = 0;
+		//ft_printf("--------------INDEX %i------------------\n", i);
+		//find_cheapest_number(a, b, size_a, size_b, i, info);
+		//ft_printf("--------------FIN %i--------------------\n", i);
 		i++;
 	}
 }
@@ -167,6 +182,8 @@ int	test_move_one_number(int *a, int *b, int *size_a, int *size_b, int index, t_
 				}
 				push_b(a, b, size_a, size_b, 0);
 				info->nb_move++;
+				reverse_rotate_b(b, *size_b, 0);
+				info->nb_move++;
 			}
 			ft_printf("TEST-: %i\n", b[i]);
 			i--;
@@ -210,34 +227,3 @@ int	*int_copy(int original)
 	return (copy);
 }
 
-int	max_number(int *tab, int size)
-{
-	int	i;
-	int	max;
-
-	i = 0;
-	max = 0;
-	while (i < size)
-	{
-		if (tab[i] > max)
-			max = tab[i];
-		i++;
-	}
-	return (max);
-}
-
-int	lower_number(int *tab, int size)
-{
-	int	i;
-	int	low;
-
-	i = 0;
-	low = tab[0];
-	while (i < size)
-	{
-		if (tab[i] < low)
-			low = tab[i];
-		i++;
-	}
-	return (low);
-}

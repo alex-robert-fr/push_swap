@@ -2,7 +2,8 @@ NAME		=	push_swap
 CC			=	clang
 SRC			=	rules.c		\
 				rules2000.c	\
-				algo3000.c
+				utils.c		\
+				algo4000.c
 ALL_SRC		=	main.c \
 				$(SRC)
 TEST_SRC	=	test/main.c \
