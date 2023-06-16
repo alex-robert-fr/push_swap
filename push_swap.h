@@ -1,6 +1,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # define INT_MAX 2147483647
+# define INT_MIN -2147483648
 # define SIZE 3
 
 // recurpere arg[1] ou tout les arguments (./push_swap 1 23 43 32 12)
@@ -34,7 +35,7 @@ int		check_array(int *nums);
 void	display(int *a, int *b, char *str, int size);
 // algo
 void	algo3(t_stack *a, t_stack *b);
-void	algo5(int *a, int *b, int size);
+void	algo5(t_stack *a, t_stack *b);
 void	algo2000(int *a, int *b, int size);
 void	algo3000(int *a, int *b, int size);
 void	radix(int *a, int *b, int size);

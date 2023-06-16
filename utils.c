@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:13:54 by alex              #+#    #+#             */
-/*   Updated: 2023/06/15 09:58:12 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/16 14:00:56 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	max_number(t_stack *tab)
 	int	max;
 
 	i = 0;
-	max = 0;
+	max = INT_MIN;
 	while (i < *tab->size)
 	{
 		if (tab->tab[i] > max)
@@ -70,6 +70,7 @@ int find_intern_position(int num, t_stack *tab) {
     int pos;
 
 	pos = 0;
+//	ft_printf("----------------------------------------\n");
     while(pos < *tab->size) {
         if(tab->tab[pos] > num && tab->tab[(pos+1) % *tab->size] < num) {
             return pos + 1;

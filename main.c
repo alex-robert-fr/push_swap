@@ -22,7 +22,7 @@ int	main(int argc, char *argv[])
 		return (1);
 	if (!tmp || !tmp[2][0])
 	{
-		ft_printf("Error\n");
+		ft_putstr_fd("Error\n", 2);
 		if (tmp)
 		{
 			free(tmp[0]);
@@ -38,9 +38,11 @@ int	main(int argc, char *argv[])
 	*size = tmp[2][0];
 	a = init_stack(tab_a, *size);
 	b = init_stack(tab_b, 0);
-	//display(a->tab, b->tab, "INIT", *size);
+//	display(a->tab, b->tab, "INIT", *size);
 	if (*size == 3)
 		algo3(a, b);
+	else if (*size <= 5)
+		algo5(a, b);
 	else
 		algo4000(a, b, size);
 //	display(a->tab, b->tab, "FINAL", *size);
@@ -138,7 +140,12 @@ int	*insert_arg_to_array(char *str, int	size)
 	i_tab = 0;
 	while (str[i])
 	{
-		if ((!i || ft_find_char(str[i-1], " +-")) && ft_isdigit(str[i]))
+		if (!i)
+		{
+			a[i_tab] = ft_atoi(str + i);
+			i_tab++;
+		}
+		else if ((ft_find_char(str[i-1], " +-")) && ft_isdigit(str[i]))
 		{
 		//	ft_printf("%s\n", str + i - 1);
 		//	ft_printf("%i\n", ft_atoi(str + i -1));

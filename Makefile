@@ -4,6 +4,7 @@ SRC			=	rules.c		\
 				rules2000.c	\
 				utils.c		\
 				algo3.c		\
+				algo5.c		\
 				algo4000.c
 ALL_SRC		=	main.c \
 				$(SRC)

@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:05:45 by alex              #+#    #+#             */
-/*   Updated: 2023/06/16 10:33:38 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/16 14:00:28 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,12 +130,11 @@ void	move_element(t_stack *a, t_stack *b, int cheapest_num)
 	i = 0;
 	while (i < min_rot)
 	{
-	//	ft_printf("DOUBLE ROT x%i, ROTA: %i ROTB: %i\n", min_rot, rot_a, rot_b);
-	//	ft_printf("NUM IS %i\n", cheapest_num);
-	//	display(a->tab, b->tab, "DOUBLE ROT", 10);
+//		ft_printf("DOUBLE ROT x%i, ROTA: %i ROTB: %i\n", min_rot, rot_a, rot_b);
+//		ft_printf("NUM IS %i\n", cheapest_num);
 		if (pos_a < *a->size - pos_a && pos_b < *b->size - pos_b)
 		{
-	//		ft_printf("ROTATE\n");
+//			ft_printf("ROTATE\n");
 			rotate_ab(a, b, 0);
 			pos_a = pos_a - 1;  // adjust positions
 			pos_b = pos_b - 1;
@@ -144,7 +143,7 @@ void	move_element(t_stack *a, t_stack *b, int cheapest_num)
 		}
 		else if (pos_a >= *a->size - pos_a && pos_b >= *b->size - pos_b)
 		{
-	//		ft_printf("REVERSE ROTATE x%i\n", min_rot);
+//			ft_printf("REVERSE ROTATE x%i\n", min_rot);
 			reverse_rotate_ab(a, b, 0);
 			pos_a = pos_a + 1;  // adjust positions
 			pos_b = pos_b + 1;
@@ -194,6 +193,7 @@ void	move_element(t_stack *a, t_stack *b, int cheapest_num)
 
 
 	push_b(a, b, 0);
+//		display(a->tab, b->tab, "DOUBLE ROT", 10);
 //	ft_printf("---------------------------------------------------------------\n");
 }
 
@@ -205,7 +205,7 @@ int		calculate_cost(int pos_a, t_stack *a, t_stack *b)
 	int pos_b;
 	int	simultaneous_rotations;
 
-//	ft_printf("NUMBER: %i\n", a->tab[pos_a]);
+//	ft_printf("\n\n\nNUMBER: %i\n", a->tab[pos_a]);
 	rotate_a = min(pos_a, *a->size - pos_a);
 //	ft_printf("A ROTATE: %i\n", rotate_a);
 	if(a->tab[pos_a] > max_number(b) || a->tab[pos_a] < lower_number(b))
@@ -222,8 +222,10 @@ int		calculate_cost(int pos_a, t_stack *a, t_stack *b)
 //	ft_printf("B ROTATE: %i\n", rotate_b);
 	count = rotate_a + rotate_b + 1;
 	simultaneous_rotations = min(rotate_a, rotate_b);
+//	ft_printf("BEFORE COST: %i\n", count);
 	count -= simultaneous_rotations;
 //	ft_printf("SIM ROTATE: %i\n", simultaneous_rotations);
+//	 ft_printf("AFTER COST: %i\n\n\n", count);
 	return (count);
 }
 /*
