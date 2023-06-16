@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:05:45 by alex              #+#    #+#             */
-/*   Updated: 2023/06/15 11:03:08 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/16 10:33:38 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,15 @@
 #include "libft.h"
 #include "push_swap.h"
 #include "rules2000.h"
+#include <stdlib.h>
 
-void	algo4000(int *tab_a, int *tab_b, int *size)
+void	algo4000(t_stack *a, t_stack *b, int *size)
 {
-	t_stack	*a;
-	t_stack	*b;
 	int		isTest = 0;
 	int		cheapest_num;
 	int		i;
 	int		max_pos;
 
-	a = init_stack(tab_a, *size);
-	b = init_stack(tab_b, 0);
 	push_b(a, b, isTest);
 	push_b(a, b, isTest);
 //	display(a->tab, b->tab, "push", *size);

@@ -7,10 +7,12 @@
 // PASS
 int	main(int argc, char *argv[])
 {
-	int	*a;
-	int	*b;
+	int	*tab_a;
+	int	*tab_b;
 	int	*size;
 	int	**tmp;
+	t_stack	*a;
+	t_stack	*b;
 
 	if (argc == 2)
 		tmp = init_tab(argv, 0);
@@ -18,21 +20,39 @@ int	main(int argc, char *argv[])
 		tmp = init_tab(argv, 1);
 	else
 		return (1);
-	if (!tmp)
+	if (!tmp || !tmp[2][0])
 	{
 		ft_printf("Error\n");
+		if (tmp)
+		{
+			free(tmp[0]);
+			free(tmp[1]);
+			free(tmp[2]);
+			free(tmp);
+		}
 		return (1);
 	}
-	a = tmp[0];
-	b = tmp[1];
+	tab_a = tmp[0];
+	tab_b = tmp[1];
 	size = ft_calloc(1, sizeof(int));
 	*size = tmp[2][0];
-	display(a, b, "INIT", *size);
-	algo4000(a, b, size);
-	display(a, b, "FINAL", *size);
+	a = init_stack(tab_a, *size);
+	b = init_stack(tab_b, 0);
+	//display(a->tab, b->tab, "INIT", *size);
+	if (*size == 3)
+		algo3(a, b);
+	else
+		algo4000(a, b, size);
+//	display(a->tab, b->tab, "FINAL", *size);
+	free(a->size);
+	free(b->size);
 	free(a);
 	free(b);
+	free(tab_a);
+	free(tab_b);
+	free(tmp[2]);
 	free(tmp);
+	free(size);
 	return (0);
 }
 
@@ -59,9 +79,9 @@ int	**init_tab(char **str, int is_multi)
 	//		ft_printf("%s => %i\n", str[i], ft_atoi(str[i]));
 			i++;
 		}
-		i--;
+	//	i--;
 	//	ft_printf("SIZE: %i\n", i);
-		tabs[2][0] = i;
+		tabs[2][0] = i - 1;
 		tabs[0] = ft_calloc(i, sizeof(int));
 		i = 1;
 		while (str[i])

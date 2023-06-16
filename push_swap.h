@@ -33,7 +33,7 @@ int		check_array(int *nums);
 // affiche les tableau
 void	display(int *a, int *b, char *str, int size);
 // algo
-void	algo3(int *a, int *b);
+void	algo3(t_stack *a, t_stack *b);
 void	algo5(int *a, int *b, int size);
 void	algo2000(int *a, int *b, int size);
 void	algo3000(int *a, int *b, int size);
@@ -54,7 +54,7 @@ int	init_copy_size(int *cp_size_a, int *size_a, int *cp_size_b, int *size_b);
 
 
 
-void	algo4000(int *tab_a, int *tab_b, int *size);
+void	algo4000(t_stack *a, t_stack *b, int *size);
 t_info	*init_info(t_stack *a, t_stack *b, int *size_b);
 t_stack	*init_stack(int *tab, int size);
 int		find_cheapest_num(t_stack *a, t_stack *b);
