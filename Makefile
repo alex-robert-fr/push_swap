@@ -3,6 +3,7 @@ CC			=	clang
 SRC			=	rules.c		\
 				rules2000.c	\
 				utils.c		\
+				algo2.c		\
 				algo3.c		\
 				algo5.c		\
 				algo4000.c

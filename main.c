@@ -15,7 +15,14 @@ int	main(int argc, char *argv[])
 	t_stack	*b;
 
 	if (argc == 2)
+	{
+		if (!ft_strlen(argv[1]))
+		{
+			ft_putstr_fd("Error\n", 2);
+			exit(1);
+		}
 		tmp = init_tab(argv, 0);
+	}
 	else if (argc > 2)
 		tmp = init_tab(argv, 1);
 	else
@@ -38,14 +45,31 @@ int	main(int argc, char *argv[])
 	*size = tmp[2][0];
 	a = init_stack(tab_a, *size);
 	b = init_stack(tab_b, 0);
-//	display(a->tab, b->tab, "INIT", *size);
-	if (*size == 3)
+	//display(a->tab, b->tab, "INIT", *size);
+	if (check_array(a->tab, *size) == 1)
+	{
+		ft_putstr_fd("Error\n", 2);
+		if (tmp)
+		{
+			free(tmp[0]);
+			free(tmp[1]);
+			free(tmp[2]);
+			free(tmp);
+			free(size);
+			free(a->size);
+			free(a);
+		}
+		return (1);
+	}
+	if (*size == 2)
+		algo2(a);
+	else if (*size == 3)
 		algo3(a, b);
 	else if (*size <= 5)
 		algo5(a, b);
 	else
 		algo4000(a, b, size);
-//	display(a->tab, b->tab, "FINAL", *size);
+	//display(a->tab, b->tab, "FINAL", *size);
 	free(a->size);
 	free(b->size);
 	free(a);
@@ -70,7 +94,26 @@ int	**init_tab(char **str, int is_multi)
 	tabs[2] = ft_calloc(2, sizeof(int));
 	if (!is_multi)
 	{
+		i = 0;
 		tabs[2][0] = get_size_arg((char*)str[1]);
+		while(i < tabs[2][0])
+		{
+			if (!ft_isdigit(str[1][i]) && str[1][i] != '+' && str[1][i] != '-')
+			{
+				ft_putstr_fd("Error\n", 2);
+				free(tabs[2]);
+				free(tabs);
+				exit(1);
+			}
+			i++;
+		}
+		if (tabs[2][0] < 2)
+		{
+			ft_putstr_fd("Error\n", 2);
+			free(tabs[2]);
+			free(tabs);
+			exit(1);
+		}
 		tabs[0] = insert_arg_to_array(str[1], tabs[2][0]);
 	}
 	else
@@ -143,6 +186,8 @@ int	*insert_arg_to_array(char *str, int	size)
 		if (!i)
 		{
 			a[i_tab] = ft_atoi(str + i);
+			while (str[i] != ' ')
+				i++;
 			i_tab++;
 		}
 		else if ((ft_find_char(str[i-1], " +-")) && ft_isdigit(str[i]))
@@ -157,16 +202,16 @@ int	*insert_arg_to_array(char *str, int	size)
 	return (a);
 }
 
-int	check_array(int *nums)
+int	check_array(int *nums, int size)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (nums[i])
+	while (i < size)
 	{
 		j = i;
-		while (nums[j])
+		while (j < size - 1)
 		{
 			j++;
 			if (nums[i] == nums[j])

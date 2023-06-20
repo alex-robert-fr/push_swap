@@ -30,10 +30,11 @@ int		get_size_array(int *array);
 int		*insert_arg_to_array(char *str, int size);
 int		*insert_args_to_array(char **str, int size);
 // Verifie les nombre dans l'array A
-int		check_array(int *nums);
+int		check_array(int *nums, int size);
 // affiche les tableau
 void	display(int *a, int *b, char *str, int size);
 // algo
+void	algo2(t_stack *a);
 void	algo3(t_stack *a, t_stack *b);
 void	algo5(t_stack *a, t_stack *b);
 void	algo2000(int *a, int *b, int size);

@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:44:03 by alex              #+#    #+#             */
-/*   Updated: 2023/06/15 11:06:39 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/16 15:59:23 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	swap_ab(int *a, int *b, int size, int isTest)
 void	swap_a(int *a, int size, int isTest)
 {
 	if(!isTest)
-		ft_printf("sa\n");
+		ft_putstr_fd("sa\n", 1);
 	swap(a, size);
 }
 

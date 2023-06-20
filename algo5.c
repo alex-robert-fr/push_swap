@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:03:00 by alex              #+#    #+#             */
-/*   Updated: 2023/06/16 12:28:17 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/17 14:00:55 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,39 @@ void	algo5(t_stack *a, t_stack *b)
 
 	size = *a->size;
 	if (*a->size == 5)
+	{
+		min = lower_number(a);
+		i = find_position(min, a);
+		while (i > 0)
+		{
+			rotate_a(a, 0);
+			i--;
+		}
 		push_b(a, b, 0);
+
+	}
+	min = lower_number(a);
+	i = find_position(min, a);
+	while (i > 0)
+	{
+		rotate_a(a, 0);
+		i--;
+	}
 	push_b(a, b, 0);
 	algo3(a, b);
 	i = 0;
+//	display(a->tab, b->tab, "Algo 5", size);
 	while (i < size - 3)
 	{
-		while (a->tab[0] < b->tab[0])
-		{
-			rotate_a(a, 0);
-		}
+		//while (a->tab[0] < b->tab[0])
+		//{
+			//rotate_a(a, 0);
+		//}
 		push_a(a, b, 0);
+		//display(a->tab, b->tab, "Algo 5", size);
 		i++;
 	}
+	/*
 	min = lower_number(a);
 	min = find_position(min, a);
 	//ft_printf("LOW: %i\n", min);
@@ -58,4 +78,5 @@ void	algo5(t_stack *a, t_stack *b)
 			i--;
 		}
 	}
+	*/
 }
