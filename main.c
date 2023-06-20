@@ -51,8 +51,9 @@ int	main(int argc, char *argv[])
 	a = init_stack(tmp[0], *size);
 	b = init_stack(tmp[1], 0);
 	if (check_array(a->tab, *size) == 1)
-	{
 		ft_putstr_fd("Error\n", 2);
+	if (check_array(a->tab, *size))
+	{
 		if (tmp)
 		{
 			free(tmp[0]);
@@ -246,7 +247,7 @@ int	check_array(int *nums, int size)
 		i++;
 	}
 	if (j == size - 1)
-		exit(1);
+		return (2);
 	return (0);
 }
 
