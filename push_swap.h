@@ -55,6 +55,9 @@ int	init_copy_size(int *cp_size_a, int *size_a, int *cp_size_b, int *size_b);
 
 
 
+int	check_is_valid(char **argv, int multi);
+int is_valid_number(char *num);
+int is_valid(char *num);
 
 void	algo4000(t_stack *a, t_stack *b, int *size);
 t_info	*init_info(t_stack *a, t_stack *b, int *size_b);
