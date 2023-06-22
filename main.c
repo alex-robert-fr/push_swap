@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/22 16:15:46 by alex              #+#    #+#             */
+/*   Updated: 2023/06/22 16:22:55 by alex             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "get_next_line.h"
 #include "libft.h"
@@ -76,7 +88,6 @@ int	main(int argc, char *argv[])
 		algo5(a, b);
 	else
 		algo4000(a, b, size);
-	//display(a->tab, b->tab, "FINAL", *size);
 	free(a->size);
 	free(b->size);
 	free(a);
@@ -102,7 +113,6 @@ int	check_is_valid(char **argv, int multi)
 			len = ft_strlen(argv[i]);
 			if (!len)
 				return (0);
-
 			if (!is_valid_number(argv[i]))
 				return (0);
 			i++;
@@ -120,7 +130,7 @@ int	check_is_valid(char **argv, int multi)
 		{
 			if (!is_valid_number(argv[1] + i))
 				return (0);
-			while (ft_isdigit(argv[1][i]))
+			while (ft_isdigit(argv[1][i]) || ft_find_char(argv[1][i], "-+"))
 				i++;
 			if (argv[1][i] == ' ')
 			{
@@ -133,7 +143,7 @@ int	check_is_valid(char **argv, int multi)
 	return (1);
 }
 
-int is_valid_number(char *num)
+int	is_valid_number(char *num)
 {
 	int	i;
 
@@ -163,12 +173,12 @@ int	**init_tab(char **str, int is_multi)
 {
 	int	**tabs;
 	int	i;
-	
-	tabs = ft_calloc(3, sizeof(int*));
+
+	tabs = ft_calloc(3, sizeof(int *));
 	tabs[2] = ft_calloc(2, sizeof(int));
 	if (!is_multi)
 	{
-		tabs[2][0] = get_size_arg((char*)str[1]);
+		tabs[2][0] = get_size_arg((char *)str[1]);
 		if (tabs[2][0] < 2)
 			return (tabs);
 		tabs[0] = insert_arg_to_array(str[1], tabs[2][0]);
@@ -180,18 +190,15 @@ int	**init_tab(char **str, int is_multi)
 			i++;
 		tabs[2][0] = i - 1;
 		tabs[0] = ft_calloc(i, sizeof(int));
-		i = 1;
-		while (str[i])
-		{
-			tabs[0][i-1] = ft_atoi(str[i]);
-			i++;
-		}
+		i = 0;
+		while (str[++i])
+			tabs[0][i - 1] = ft_atoi(str[i]);
 	}
 	tabs[1] = ft_calloc(tabs[2][0] + 1, sizeof(int));
 	return (tabs);
 }
 
-int	*insert_arg_to_array(char *str, int	size)
+int	*insert_arg_to_array(char *str, int size)
 {
 	int	*a;
 	int	i;
@@ -211,11 +218,8 @@ int	*insert_arg_to_array(char *str, int	size)
 				i++;
 			i_tab++;
 		}
-		else if ((ft_find_char(str[i-1], " +-")) && ft_isdigit(str[i]))
-		{
-			a[i_tab] = ft_atoi(str + i - 1);
-			i_tab++;
-		}
+		else if ((ft_find_char(str[i - 1], " +-")) && ft_isdigit(str[i]))
+			a[i_tab++] = ft_atoi(str + i - 1);
 		i++;
 	}
 	return (a);
@@ -238,7 +242,6 @@ int	check_array(int *nums, int size)
 		}
 		i++;
 	}
-	i = 0;
 	j = 0;
 	while (i < size - 1)
 	{
@@ -260,7 +263,7 @@ int	get_size_arg(char *str)
 	count_num = 0;
 	while (str[i])
 	{
-		if (ft_isdigit(str[i]) && (!i || ft_find_char(str[i-1], " +-")))
+		if (ft_isdigit(str[i]) && (!i || ft_find_char(str[i - 1], " +-")))
 			count_num++;
 		if (!ft_find_char(str[i], " +-") && !ft_isdigit(str[i]))
 			return (0);
@@ -269,39 +272,24 @@ int	get_size_arg(char *str)
 	return (count_num);
 }
 
-int is_valid(char *num) {
-    int i = 0;
-    int is_negative = 0;
-    int digit_count = 0;
+int	is_valid(char *num)
+{
+	int	i;
 
-    while (num[i] == ' ')
-	{
-        i++;
-    }
-    if (num[i] == '-') {
-        is_negative = 1;
-        i++;
-    } else if (num[i] == '+') {
-        i++;
-    }
+	i = 0;
+	while (num[i] == ' ')
+		i++;
+	if (num[i] == '-')
+		i++;
+	else if (num[i] == '+')
+		i++;
 	while (num[i] == '0')
+		i++;
+	while (num[i] && num[i] != ' ')
 	{
-        i++;
-    }
-    while (num[i] && num[i] != ' ') {
-        if (!ft_isdigit(num[i]))
-		{
-            return 0;
-		}
-        digit_count++;
-        i++;
-    }
-	if ((digit_count > 10) || 
-    (digit_count == 10 && !is_negative && (num[i - 10] > '2' || (num[i - 10] == '2' && num[i - 9] > '1'))) || 
-    (digit_count == 10 && is_negative && (num[i - 10] > '2' || (num[i - 10] == '2' && num[i - 9] > '1'))))
-	{
-        return 0;
-    }
-    return 1;
+		if (!ft_isdigit(num[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }
-
