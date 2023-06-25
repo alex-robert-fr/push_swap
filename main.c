@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:15:46 by alex              #+#    #+#             */
-/*   Updated: 2023/06/22 16:22:55 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/25 11:12:22 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,70 @@
 #include "push_swap.h"
 #include "rules.h"
 
+static void	free_tmp(int **tmp)
+{
+	free(tmp[0]);
+	free(tmp[1]);
+	free(tmp[2]);
+	free(tmp);
+}
+
+static void	free_memory(int **tmp, t_stack *a, t_stack *b, int *size)
+{
+	free_tmp(tmp);
+	free(size);
+	free(a->size);
+	free(a);
+	free(b->size);
+	free(b);
+}
+
+static void	run_algorithm(t_stack *a, t_stack *b, int *size)
+{
+	if (*size == 2)
+		algo2(a);
+	else if (*size == 3)
+		algo3(a, b);
+	else if (*size <= 5)
+		algo5(a, b);
+	else
+		algo4000(a, b, size);
+}
+
+static void	print_error_and_exit(void)
+{
+	ft_putstr_fd("Error\n", 2);
+	exit(1);
+}
+
+static void	*tmp_init(int argc, char *argv[])
+{
+	int		**tmp;
+
+	tmp = NULL;
+	if (argc == 2)
+	{
+		if (!check_is_valid(argv, 0))
+			print_error_and_exit();
+		tmp = init_tab(argv, 0);
+	}
+	else if (argc > 2)
+	{
+		if (!check_is_valid(argv, 1))
+			print_error_and_exit();
+		tmp = init_tab(argv, 1);
+	}
+	else
+		print_error_and_exit();
+	if (!tmp || tmp[2][0] < 2)
+	{
+		if (tmp)
+			free_tmp(tmp);
+		exit(1);
+	}
+	return (tmp);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_stack	*a;
@@ -24,40 +88,7 @@ int	main(int argc, char *argv[])
 	int		**tmp;
 	int		*size;
 
-	if (argc == 2)
-	{
-		if (!check_is_valid(argv, 0))
-		{
-			ft_putstr_fd("Error\n", 2);
-			return (1);
-		}
-		tmp = init_tab(argv, 0);
-	}
-	else if (argc > 2)
-	{
-		if (!check_is_valid(argv, 1))
-		{
-			ft_putstr_fd("Error\n", 2);
-			return (1);
-		}
-		tmp = init_tab(argv, 1);
-	}
-	else
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (1);
-	}
-	if (!tmp || tmp[2][0] < 2)
-	{
-		if (tmp)
-		{
-			free(tmp[0]);
-			free(tmp[1]);
-			free(tmp[2]);
-			free(tmp);
-		}
-		return (1);
-	}
+	tmp = tmp_init(argc, argv);
 	size = ft_calloc(1, sizeof(int));
 	*size = tmp[2][0];
 	a = init_stack(tmp[0], *size);
@@ -67,80 +98,65 @@ int	main(int argc, char *argv[])
 	if (check_array(a->tab, *size))
 	{
 		if (tmp)
-		{
-			free(tmp[0]);
-			free(tmp[1]);
-			free(tmp[2]);
-			free(tmp);
-			free(size);
-			free(a->size);
-			free(a);
-			free(b->size);
-			free(b);
-		}
+			free_memory(tmp, a, b, size);
 		return (1);
 	}
-	if (*size == 2)
-		algo2(a);
-	else if (*size == 3)
-		algo3(a, b);
-	else if (*size <= 5)
-		algo5(a, b);
-	else
-		algo4000(a, b, size);
-	free(a->size);
-	free(b->size);
-	free(a);
-	free(b);
-	free(tmp[0]);
-	free(tmp[1]);
-	free(tmp[2]);
-	free(tmp);
-	free(size);
+	run_algorithm(a, b, size);
+	free_memory(tmp, a, b, size);
 	return (0);
 }
 
-int	check_is_valid(char **argv, int multi)
+int	check_multi_valid(char **argv)
 {
 	int	i;
 	int	len;
 
-	if (multi)
+	i = 1;
+	while (argv[i])
 	{
-		i = 1;
-		while (argv[i])
-		{
-			len = ft_strlen(argv[i]);
-			if (!len)
-				return (0);
-			if (!is_valid_number(argv[i]))
-				return (0);
-			i++;
-		}
-	}
-	else
-	{
-		i = 0;
-		len = ft_strlen(argv[1]);
-		if (argv[1][i] == ' ')
-			i++;
-		if (!len || i == len)
+		len = ft_strlen(argv[i]);
+		if (!len)
 			return (0);
-		while (i < len)
-		{
-			if (!is_valid_number(argv[1] + i))
-				return (0);
-			while (ft_isdigit(argv[1][i]) || ft_find_char(argv[1][i], "-+"))
-				i++;
-			if (argv[1][i] == ' ')
-			{
-				i++;
-				continue ;
-			}
-			i++;
-		}
+		if (!is_valid_number(argv[i]))
+			return (0);
+		i++;
 	}
 	return (1);
+}
+
+int	check_single_valid(char *argv)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(argv);
+	if (argv[i] == ' ')
+		i++;
+	if (!len || i == len)
+		return (0);
+	while (i < len)
+	{
+		if (!is_valid_number(argv + i))
+			return (0);
+		while (ft_isdigit(argv[i]) || ft_find_char(argv[i], "-+"))
+			i++;
+		if (argv[i] == ' ')
+		{
+			i++;
+			continue ;
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	check_is_valid(char **argv, int multi)
+{
+	if (multi)
+		return (check_multi_valid(argv));
+	else
+		return (check_single_valid(argv[1]));
 }
 
 int	is_valid_number(char *num)
