@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:13:54 by alex              #+#    #+#             */
-/*   Updated: 2023/06/16 14:00:56 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/25 12:11:48 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	max_number(t_stack *tab)
 	return (max);
 }
 
-int		lower_number(t_stack *tab)
+int	lower_number(t_stack *tab)
 {
 	int	i;
 	int	low;
@@ -53,29 +53,30 @@ int		lower_number(t_stack *tab)
 	return (low);
 }
 
-int find_position(int num, t_stack *tab) {
+int	find_position(int num, t_stack *tab)
+{
 	int	i;
 
 	i = 0;
-    while(i < *tab->size) {
-        if (tab->tab[i] == num) {
-            return (i);
-        }
+	while (i < *tab->size)
+	{
+		if (tab->tab[i] == num)
+			return (i);
 		i++;
-    }
+	}
 	return (-1);
 }
 
-int find_intern_position(int num, t_stack *tab) {
-    int pos;
+int	find_intern_position(int num, t_stack *tab)
+{
+	int	pos;
 
 	pos = 0;
-//	ft_printf("----------------------------------------\n");
-    while(pos < *tab->size) {
-        if(tab->tab[pos] > num && tab->tab[(pos+1) % *tab->size] < num) {
-            return pos + 1;
-        }
+	while (pos < *tab->size)
+	{
+		if (tab->tab[pos] > num && tab->tab[(pos + 1) % *tab->size] < num)
+			return (pos + 1);
 		pos++;
-    }
-    return *tab->size;
+	}
+	return (*tab->size);
 }

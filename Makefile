@@ -1,8 +1,13 @@
 NAME		=	push_swap
 CC			=	clang
-SRC			=	rules.c		\
-				rules2000.c	\
-				utils.c		\
+SRC			=	rules2000.c	\
+				utils/utils.c\
+				utils/algo4000_utils.c\
+				utils/algo4000_utils_2.c\
+				utils/main_utils.c\
+				utils/main_utils_2.c\
+				utils/rules2000_utils.c\
+				utils/rules2000_utils_2.c\
 				algo2.c		\
 				algo3.c		\
 				algo5.c		\
@@ -11,7 +16,7 @@ ALL_SRC		=	main.c \
 				$(SRC)
 TEST_SRC	=	test/main.c \
 				$(SRC)
-CFLAGS		=	-Ilibft/includes -Ilibft/includes/ft_printf -Itest -Wextra -Wall -Werror -g
+CFLAGS		=	-I. -Ilibft/includes -Ilibft/includes/ft_printf -Itest -Wextra -Wall -Werror -g
 CFLAGSTEST	=	-lcheck
 LIBFT_PATH	=	libft/
 LIBFT_NAME	=	libft.a
