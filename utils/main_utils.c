@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 12:42:48 by alex              #+#    #+#             */
-/*   Updated: 2023/06/25 12:43:18 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/25 14:57:03 by alrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,12 @@ int	get_size_arg(char *str)
 	return (count_num);
 }
 
-int	is_valid(char *num)
+int	is_valid(char *num, int is_multi)
 {
 	int	i;
 
 	i = 0;
+	num = ft_strtrim(num, " ");
 	while (num[i] == ' ')
 		i++;
 	if (num[i] == '-')
@@ -129,9 +130,9 @@ int	is_valid(char *num)
 		i++;
 	while (num[i] == '0')
 		i++;
-	while (num[i] && num[i] != ' ')
+	while (num[i])
 	{
-		if (!ft_isdigit(num[i]))
+		if (!ft_isdigit(num[i]) && is_multi && (num[i] == ' ' || num[i] == '+' || num[i] == '-'))
 			return (0);
 		i++;
 	}

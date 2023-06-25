@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:05:45 by alex              #+#    #+#             */
-/*   Updated: 2023/06/25 12:40:55 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/25 14:20:55 by alrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,30 +59,28 @@ void	algo4000(t_stack *a, t_stack *b, int *size)
 	}
 }
 
-t_rotation_data	init_rotation_data(int pos_a, int pos_b, int rot_a, int rot_b)
+void	init_rotation_data(t_rotation_data *data, int pos_a, int pos_b, int rot_a, int rot_b)
 {
-	t_rotation_data	rotation_data;
-
-	rotation_data.pos_a = &pos_a;
-	rotation_data.pos_b = &pos_b;
-	rotation_data.rot_a = &rot_a;
-	rotation_data.rot_b = &rot_b;
-	return (rotation_data);
+	data->pos_a = &pos_a;
+	data->pos_b = &pos_b;
+	data->rot_a = &rot_a;
+	data->rot_b = &rot_b;
 }
 
-t_rotation_data	init_move_element(t_stack *a, t_stack *b, int cheapest_num)
+t_rotation_data	*init_move_element(t_stack *a, t_stack *b, int cheapest_num)
 {
 	int				pos_a;
 	int				pos_b;
 	int				rot_a;
 	int				rot_b;
-	t_rotation_data	rotation_data;
+	t_rotation_data	*rotation_data;
 
+	rotation_data = ft_calloc(1, sizeof(t_rotation_data));
 	pos_a = find_position(cheapest_num, a);
 	pos_b = find_position_for_move(a, b, pos_a);
 	rot_a = min(pos_a, *a->size);
 	rot_b = min(pos_b, *b->size);
-	rotation_data = init_rotation_data(pos_a, pos_b, rot_a, rot_b);
+	init_rotation_data(rotation_data ,pos_a, pos_b, rot_a, rot_b);
 	return (rotation_data);
 }
 
@@ -92,7 +90,7 @@ void	move_element(t_stack *a, t_stack *b, int cheapest_num)
 	int				pos_a;
 	int				pos_b;
 	int				i;
-	t_rotation_data	rotation_data;
+	t_rotation_data	*rotation_data;
 
 	pos_a = find_position(cheapest_num, a);
 	pos_b = find_position_for_move(a, b, pos_a);
@@ -100,11 +98,11 @@ void	move_element(t_stack *a, t_stack *b, int cheapest_num)
 			min(pos_b, *b->size));
 	i = 0;
 	rotation_data = init_move_element(a, b, cheapest_num);
-	rotation_data.a = a;
-	rotation_data.b = b;
+	rotation_data->a = a;
+	rotation_data->b = b;
 	while (i < min_rot)
 	{
-		perform_rotation(&rotation_data);
+		perform_rotation(rotation_data);
 		i++;
 	}
 	rotate_a_to_position(a, pos_a);

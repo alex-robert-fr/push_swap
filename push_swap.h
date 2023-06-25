@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 12:12:15 by alex              #+#    #+#             */
-/*   Updated: 2023/06/25 12:45:44 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/25 14:37:21 by alrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	algo2(t_stack *a);
 void	algo3(t_stack *a, t_stack *b);
 void	algo5(t_stack *a, t_stack *b);
 int		check_is_valid(char **argv, int multi);
-int		is_valid_number(char *num);
-int		is_valid(char *num);
+int		is_valid_number(char *num, int is_multi);
+int		is_valid(char *num, int is_multi);
 int		check_multi_valid(char **argv);
 int		check_single_valid(char *argv);
 void	algo4000(t_stack *a, t_stack *b, int *size);

@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 12:32:57 by alex              #+#    #+#             */
-/*   Updated: 2023/06/25 12:39:07 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/25 14:11:48 by alrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 void	perform_rotation(t_rotation_data *data)
 {
+	if (!data)
+		return ;
 	if (*(data->pos_a) < *(data->a->size) - *(data->pos_a) && \
 			*(data->pos_b) < *(data->b->size) - *(data->pos_b))
 	{

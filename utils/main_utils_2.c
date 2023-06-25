@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 12:44:13 by alex              #+#    #+#             */
-/*   Updated: 2023/06/25 12:46:44 by alex             ###   ########.fr       */
+/*   Updated: 2023/06/25 14:37:21 by alrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_multi_valid(char **argv)
 		len = ft_strlen(argv[i]);
 		if (!len)
 			return (0);
-		if (!is_valid_number(argv[i]))
+		if (!is_valid_number(argv[i], 1))
 			return (0);
 		i++;
 	}
@@ -44,7 +44,7 @@ int	check_single_valid(char *argv)
 		return (0);
 	while (i < len)
 	{
-		if (!is_valid_number(argv + i))
+		if (!is_valid_number(argv + i, 0))
 			return (0);
 		while (ft_isdigit(argv[i]) || ft_find_char(argv[i], "-+"))
 			i++;
@@ -66,7 +66,7 @@ int	check_is_valid(char **argv, int multi)
 		return (check_single_valid(argv[1]));
 }
 
-int	is_valid_number(char *num)
+int	is_valid_number(char *num, int is_multi)
 {
 	int	i;
 
@@ -87,7 +87,7 @@ int	is_valid_number(char *num)
 			i++;
 		}
 	}
-	if (!is_valid(num))
+	if (!is_valid(num, is_multi))
 		return (0);
 	return (1);
 }
